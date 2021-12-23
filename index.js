@@ -59,6 +59,19 @@ async function run() {
             const result = await ordersCollection.find(query).toArray();
             res.json(result);
         });
+
+        //updating payment status
+        app.put("/pay/:email", async (req, res) => {
+            // const payment = req.body;
+            const filter = { email: req.params.email };
+            const updateDoc = {
+                $set: {
+                    paymentStatus: true,
+                },
+            };
+            const result = await ordersCollection.updateMany(filter, updateDoc);
+            res.json(result);
+        });
     } finally {
         // await client.close();
     }
