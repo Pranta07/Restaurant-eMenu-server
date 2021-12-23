@@ -42,6 +42,14 @@ async function run() {
             const result = await usersCollection.insertOne(user);
             // res.json(result);
         });
+
+        //post api for recieving order
+        app.post("/orders", async (req, res) => {
+            // console.log(req.body);
+            const doc = req.body;
+            const result = await ordersCollection.insertOne(doc);
+            res.json(result);
+        });
     } finally {
         // await client.close();
     }
