@@ -27,6 +27,7 @@ async function run() {
         // console.log("Database connected!");
         const database = client.db("eMenu");
         const usersCollection = database.collection("users");
+        const ordersCollection = database.collection("orders");
 
         //to verify an user is admin or not
         app.get("/users/:email", async (req, res) => {
