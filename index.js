@@ -43,7 +43,7 @@ async function run() {
             // res.json(result);
         });
 
-        //post api for recieving order
+        //post api for receiving order
         app.post("/orders", async (req, res) => {
             // console.log(req.body);
             const doc = req.body;
