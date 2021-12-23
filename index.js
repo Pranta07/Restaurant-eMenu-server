@@ -5,7 +5,7 @@ const { MongoClient } = require("mongodb");
 const ObjectId = require("mongodb").ObjectId;
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3000;
 
 //middleware
 app.use(cors());
@@ -24,9 +24,26 @@ const client = new MongoClient(uri, {
 async function run() {
     try {
         await client.connect();
-        console.log("Database connected!");
+        // console.log("Database connected!");
+        const database = client.db("eMenu");
+        const usersCollection = database.collection("users");
+
+        //to verify an user is admin or not
+        /* app.get("/users/:email", async (req, res) => {
+            const email = req.params.email;
+            const query = { email: email };
+            const result = await usersCollection.findOne(query);
+            res.json(result);
+        }); */
+
+        app.post("/users", async (req, res) => {
+            const user = req.body;
+            // console.log(user);
+            const result = await usersCollection.insertOne(user);
+            // res.json(result);
+        });
     } finally {
-        await client.close();
+        // await client.close();
     }
 }
 run().catch(console.dir);
