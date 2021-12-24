@@ -74,9 +74,8 @@ async function run() {
         });
 
         //updating food status
-        app.post("/food/:email", async (req, res) => {
-            const data = JSON.parse(req.body);
-            const status = data.status;
+        app.put("/food/:email", async (req, res) => {
+            const status = req.body.status;
             const filter = { email: req.params.email };
             const updateDoc = {
                 $set: {
