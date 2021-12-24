@@ -72,6 +72,19 @@ async function run() {
             const result = await ordersCollection.updateMany(filter, updateDoc);
             res.json(result);
         });
+
+        //updating food status
+        app.put("/food/:email", async (req, res) => {
+            const status = JSON.parse(req.body).status;
+            const filter = { email: req.params.email };
+            const updateDoc = {
+                $set: {
+                    foodStatus: status,
+                },
+            };
+            const result = await ordersCollection.updateMany(filter, updateDoc);
+            res.json(result);
+        });
     } finally {
         // await client.close();
     }
