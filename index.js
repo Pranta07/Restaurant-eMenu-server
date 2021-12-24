@@ -74,7 +74,7 @@ async function run() {
         });
 
         //updating food status
-        app.put("/food/:email", async (req, res) => {
+        app.post("/food/:email", async (req, res) => {
             const status = JSON.parse(req.body).status;
             const filter = { email: req.params.email };
             const updateDoc = {
