@@ -93,7 +93,7 @@ async function run() {
         });
 
         //updating food status of a specific order
-        app.put("/food/:id", async (req, res) => {
+        app.put("/order/:id", async (req, res) => {
             const status = req.body.status;
             const filter = { _id: ObjectId(req.params.id) };
             const updateDoc = {
