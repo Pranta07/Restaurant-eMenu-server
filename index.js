@@ -79,7 +79,7 @@ async function run() {
             res.json(result);
         });
 
-        //updating food status
+        //updating food status of a customer
         app.put("/food/:email", async (req, res) => {
             const status = req.body.status;
             const filter = { email: req.params.email };
@@ -89,6 +89,19 @@ async function run() {
                 },
             };
             const result = await ordersCollection.updateMany(filter, updateDoc);
+            res.json(result);
+        });
+
+        //updating food status of a specific order
+        app.put("/food/:id", async (req, res) => {
+            const status = req.body.status;
+            const filter = { _id: ObjectId(req.params.id) };
+            const updateDoc = {
+                $set: {
+                    foodStatus: status,
+                },
+            };
+            const result = await ordersCollection.updateOne(filter, updateDoc);
             res.json(result);
         });
     } finally {
