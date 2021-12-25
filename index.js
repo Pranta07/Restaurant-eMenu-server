@@ -82,7 +82,7 @@ async function run() {
         //updating food status of a customer
         app.put("/food/:email", async (req, res) => {
             const status = req.body.status;
-            const filter = { email: req.params.email };
+            const filter = { email: req.params.email, foodStatus: "Pending" };
             const updateDoc = {
                 $set: {
                     foodStatus: status,
